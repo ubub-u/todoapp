@@ -5,6 +5,27 @@
         .hidden{
             display: none;
         }
+
+        ul{
+            list-style: 0;
+            padding: 0;
+            margin: 0;
+            width: 200px;
+        }
+
+        li {
+            clear: both;
+        }
+
+        li button{
+            -webkit-appearance: none;
+            border: none;
+            color: red;
+            outline: none;
+            float: right;
+            cursor: pointer;
+            font-size: 20px;
+        }
     </style>
 </head>
 <body>
@@ -15,10 +36,61 @@
     <div id="error" class="hidden">Someting Went Wrong</div>
     <ul id="todos">
         {% for d in data %}
-        <li>{{d.description}}</li>
+        <li>
+            <input id="mark" class="check-completed" data-id='{{ d.id }}' type="checkbox" {% if d.completed %} checked {% endif %}/> 
+            {{d.description}}
+            <button class=button data-id="{{ d.id }}">x</button>
+        </li>
         {% endfor %}
     </ul>
     <script>
+        const buttons = document.querySelectorAll('.button')
+        buttons.forEach(element => {
+            element.onclick = function(e){
+                console.log(e)
+                todoid = e.target.dataset['id']
+                fetch('/todos/'+todoid +'delete', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(function(){
+                    document.getElementById('error').className = 'hidden';
+                })
+                .catch(function(){
+                    document.getElementById('error').className = '';
+                })
+                parent = element.parentNode;
+                parentparent = parent.parentNode;
+                parentparent.removeChild(parent);
+                console.log(parent);
+            }
+        });
+        const checkboxes = document.querySelectorAll('.check-completed');
+        checkboxes.forEach(element => {
+            element.onchange = function(e){
+                console.log('event', e);
+                const newCompleted = e.target.checked;
+                todoId = e.target.dataset['id']
+                fetch('/todos/'+ todoId + 'set-completed', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        'completed': newCompleted
+                    }),
+                    headers: {
+                        'Content-Type' : 'application/json'
+                    }
+                })
+                .then(function(){
+                    document.getElementById('error').className = 'hidden'
+                })
+
+                .catch(function(){
+                document.getElementById('error').className = '';
+                })
+            }
+        });
         document.getElementById('form').onsubmit = function(e){
             e.preventDefault();
             fetch('/todos/create', {
@@ -39,6 +111,7 @@
             .then(function(jsonResponse){
                 console.log(jsonResponse['description']);
                 let liItem = document.createElement('li');
+                let inputItem = document.createElement('input')
                 liItem.innerHTML = jsonResponse['description'];
                 document.getElementById('todos').appendChild(liItem);
                 document.getElementById('error').className = 'hidden';

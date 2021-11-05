@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, url_for, jsonify
+from flask import Flask, json, request, redirect, url_for, jsonify
 from flask.templating import render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -17,7 +17,6 @@ class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String(), nullable=False)
     completed = db.Column(db.Boolean, nullable=False, default=False)
-    newitem = db.Column(db.String(), nullable=False)
 
 
 
@@ -43,11 +42,44 @@ def create_todo():
         db.session.close()
         if not error:
             return jsonify(body)
+
+@app.route('/todos/<todo_id>set-completed', methods=['POST'])
+def set_completed_todo(todo_id):
+    error = False
+    body = {}
+    try:
+        completed = request.get_json()['completed']
+        todo = Todo.query.get(todo_id)
+        todo.completed = completed
+        db.session.commit()
+    except:
+        db.session.rollback()
+        print(sys.exc_info())
+        error = True
+    finally:
+        db.session.close()
+    return redirect(url_for('index'))
+
+@app.route('/todos/<todo_id>delete', methods=['POST'])
+def delete_todo(todo_id):
+    try:
+        todo = Todo.query.get(todo_id)
+        db.session.delete(todo)
+        db.session.commit()
+    except:
+        db.session.rollback()
+        print(sys.exc_info())
+    finally:
+        db.session.close()
+    return redirect(url_for('index'))
+
+
+
             
 
 @app.route('/')
 def index():
-    return render_template('index.html', data=Todo.query.all())
+    return render_template('index.html', data=Todo.query.order_by('id').all())
 
 if __name__ == '__main__':
     app.run(debug=True)

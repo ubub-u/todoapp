@@ -31,7 +31,10 @@
                 }
             })
             .then(function(response){
-                return response.json();
+                console.log(response)
+                rep = response.json();
+                console.log(rep)
+                return rep
             })
             .then(function(jsonResponse){
                 console.log(jsonResponse['description']);

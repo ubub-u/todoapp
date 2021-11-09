@@ -10,7 +10,7 @@
             list-style: 0;
             padding: 0;
             margin: 0;
-            width: 200px;
+            width: 300px;
         }
 
         li {
@@ -26,23 +26,44 @@
             cursor: pointer;
             font-size: 20px;
         }
+
+        .lists-wrapper, .todos-wrapper{
+            display: inline-block;
+            vertical-align: top;
+        }
     </style>
 </head>
 <body>
-    <form id="form">
-        <input type="text" name="description" id='description'>
-        <input type="submit" value="Create">
+    <form id='list-form'>
+        <input type="text" name="lists" id='list'>
+        <input type="submit" value='new list'>
     </form>
-    <div id="error" class="hidden">Someting Went Wrong</div>
-    <ul id="todos">
-        {% for d in data %}
-        <li>
-            <input id="mark" class="check-completed" data-id='{{ d.id }}' type="checkbox" {% if d.completed %} checked {% endif %}/> 
-            {{d.description}}
-            <button class=button data-id="{{ d.id }}">x</button>
-        </li>
-        {% endfor %}
-    </ul>
+    <div class="lists-wrapper">
+        <ul>
+            {% for list in lists %}
+            <li><a href="/lists/{{ list.id }}">{{list.name}}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+
+    <div class="todos-wrapper">
+        <form id="form">
+            <input type="text" name="description" id='description'>
+            <input type="submit" value="Create">
+        </form>
+        <div id="error" class="hidden">Someting Went Wrong</div>
+        <h4>{{ active_list.name }}</h4>
+        <ul id="todos">
+            {% for todo in todos %}
+            <li>
+                <input id="mark" class="check-completed" data-id='{{ todo.id }}' type="checkbox" {% if todo.completed %} checked {% endif %}/> 
+                {{todo.description}}
+                <button class=button data-id="{{ todo.id }}">x</button>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
     <script>
         const buttons = document.querySelectorAll('.button')
         buttons.forEach(element => {

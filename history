@@ -1,0 +1,220 @@
+\conninfo
+\q
+\dt
+SELECT * FROM table2
+SELECT * FROM table2;
+/bin/python3 /home/ubu/Projects/class-demos/tobedeleted.py
+/bin/python3 /home/ubu/Projects/class-demos/tobedeleted.py
+\q
+\conninfo
+SELECT * FROM persons
+SEELCT * FROM persons;
+SELECT * from persons;
+SELECT * FROM persons;
+\q
+\dt
+\dt
+\dt
+DROP TABLE todo
+\dt
+DROP TABLE todo;
+\dt
+DROP TBALE IF EXISTS todo;
+DROP TABLE IF EXISTS todo;
+\st
+\dt
+INSERT INTO todos VALUES ('thing 1')
+\d todos
+SELECT * FROM todos;
+INSERT INTO todos (description) VALUES ('thing 1');
+SELECT * FROM todos;
+INSERT INTO todos VALUES ('thing2');
+INSERT INTO todos VALUES ('thing 2');
+INSERT INTO todos (description) VALUES ('thing2');
+select * from todos;
+select * from todos;
+select * from todos;
+select * from todos;
+select * from todos;
+select * from todos;
+\q
+select * from todos;
+select * from todos;
+\d
+\q
+\conninfo
+flask db --help
+\q
+select * from todos;
+\q
+select * from todos;
+\q
+select * from todos;
+\q
+\dt
+select * from todos;
+\q
+insert into todos (description) values ('thing 1');
+insert into todos (description) values ('thing 2');
+insert into todos (description) values ('thing 3');
+\q
+select * from todos;
+\q
+insert into todos (description) values ('thing 1');
+insert into todos (description) values ('thing 2');
+insert into todos (description) values ('thing 3');
+\q
+select * from todos;
+\q
+select * from todos;
+select * from todos;
+select * from todos;
+select * from todos;
+select * from todos;
+select * from todos;
+INSERT INTO todos (description) VALUES ('this is a thing');
+INSERT INTO todos (description, completed) VALUES ('what is my id', False);
+select * from todos;
+DELETE *
+\q
+DELETE *;
+DELETE * FROM todos;
+DELETE FROM todos *
+\q
+\dt
+select * from todos;
+\q
+select * from todos;
+\q
+\dt
+\dt
+\q
+\q
+\dt
+]r
+\q
+\r
+\d
+\dt todos
+\d todos
+\d todos
+\d todos
+\dt
+select * from todos;
+\dt
+INSERT INTO todolist (name) VALUES ('Unassigned');
+select * from todos;
+select * from todos;
+select * from todolist
+\q
+select * from todos
+]\q
+select * from todolist
+\q
+select * from todolist
+\q
+select * from todolist;
+\q
+]dt
+\q
+\dt
+\d
+\d
+\dt
+\q
+\q
+\q
+\dt
+\q
+\dt
+\d Venue
+\dt Artist
+\d
+\d artist
+\d Artist
+\d Venue
+\q
+\d artist
+q\
+\q
+\d artist
+select * from artist;
+\dt Venue
+dt/ Venue
+\dt Venue
+select * from venue
+select * from Venue
+\q
+select * from venue
+\q
+\i plantsdb_setup.sql
+\q
+\i plantsdb_setup.sql
+\q
+\dt
+select * from plants;
+\d
+\i setup.sql
+\q
+select * from book
+\q
+select * from book;
+\dt
+select * from books;
+\q
+select * from books;
+\q
+select * from books
+\q
+select * from books;
+\q
+DROP DATABASE bookshelf_test;
+CREATE DATABASE bookshelf_test WITH TEMPLATE bookshelf;
+CREATE DATABASE bookshelf_test WITH TEMPLATE bookshelf;
+\q
+ls
+\q
+select * from books;
+select * from books;
+\q
+select * from shows;
+select * from show;
+select * from show;
+\d
+select * from categories;
+\q
+\d
+\q
+select * from questions;
+\q
+select * from questions;
+\q
+select * from questions;
+\q
+select * from questions;
+\q
+select * from questions;
+\q
+select * from questions;
+\q
+\q
+select * from questions order by id desc;
+\q
+select * from questions;
+\q
+select * from questions;
+q/
+\q
+select * from questions
+;
+\q
+\q
+\dt
+CREATE DATABASE todoapp;
+\s todoapp
+\c todoapp
+\d
+\s todoapp
+\s
+\c bookshelf
+\s history
